@@ -2,8 +2,16 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/",
-      "handler": "stripe.index",
+      "path": "/settings",
+      "handler": "stripe.retrieveSettings",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/settings",
+      "handler": "stripe.updateSettings",
       "config": {
         "policies": []
       }
