@@ -11,6 +11,9 @@ import {
   request
 } from 'strapi-helper-plugin'
 
+import {Container, Block } from '../../components/StrapiStyled'
+import {InputText, Button, Padded} from '@buffetjs/core'
+
 const HomePage = () => {
 
   const [pk, setPk] = useState('')
@@ -30,27 +33,44 @@ const HomePage = () => {
   const updatedPk = async (e) => {
     try{
       e.preventDefault()
-
+      strapi.lockApp()
       const response = await request(`/${pluginId}/settings`, {
         method: 'POST',
         body: {pk}
       })
+      strapi.notification.success('Success')
     } catch(err){
-      console.log("err ", err)
+      strapi.notification.error(err.toString())
     }
+    strapi.unlockApp()
   }
 
   return (
-    <div>
-      <h1>Stripe</h1>
-      <p>Save your private key here</p>
-      <form onSubmit={updatedPk}>
-        <input 
-          value={pk}
-          onChange={(e) => setPk(e.target.value)}
-        />
-        <button>Submit</button>
-      </form>
+    <div className="row">
+      <div className="col-md-12">
+      <Container>
+        <Block>
+          <h1>Stripe</h1>
+          <p>Save your private key here</p>
+          <form onSubmit={updatedPk}>
+            <InputText 
+              value={pk}
+              onChange={(e) => setPk(e.target.value)}
+              name="input"
+              type="password"
+              placeholder="Stripe Private Key"
+            />
+            
+            <Padded
+              top
+            >
+              <Button color="primary" label="Submit" />
+            </Padded>
+            
+          </form>
+        </Block>
+      </Container>
+      </div>
     </div>
   );
 };
