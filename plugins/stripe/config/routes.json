@@ -15,6 +15,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/pay",
+      "handler": "stripe.createPaymentIntent",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
