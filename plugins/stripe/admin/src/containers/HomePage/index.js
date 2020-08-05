@@ -64,7 +64,7 @@ const HomePage = () => {
             <Padded
               top
             >
-              <Button color="primary" label="Submit" />
+              <Button color="primary" label="Submit" type="submit" />
             </Padded>
             
           </form>
